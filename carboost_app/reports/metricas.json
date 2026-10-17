@@ -1,0 +1,123 @@
+{
+  "prueba": {
+    "Persistencia (mañana = hoy)": {
+      "mae_kwh": 13.57,
+      "rmse_kwh": 18.59,
+      "mae_m3": 3.39,
+      "costo_total_cop": 29031810,
+      "costo_anual_cop": 13262341,
+      "diesel_kwh_anual": 2473,
+      "agua_perdida_m3_anual": 620
+    },
+    "Climatología mensual": {
+      "mae_kwh": 17.3,
+      "rmse_kwh": 22.93,
+      "mae_m3": 4.32,
+      "costo_total_cop": 34279760,
+      "costo_anual_cop": 15659715,
+      "diesel_kwh_anual": 3729,
+      "agua_perdida_m3_anual": 646
+    },
+    "Gradient Boosting P50": {
+      "mae_kwh": 11.55,
+      "rmse_kwh": 15.61,
+      "mae_m3": 2.89,
+      "costo_total_cop": 23294115,
+      "costo_anual_cop": 10641242,
+      "diesel_kwh_anual": 2403,
+      "agua_perdida_m3_anual": 453
+    },
+    "Gradient Boosting cuantil óptimo q*=0.70": {
+      "mae_kwh": 13.06,
+      "rmse_kwh": 17.69,
+      "mae_m3": 3.27,
+      "costo_total_cop": 20960148,
+      "costo_anual_cop": 9575036,
+      "diesel_kwh_anual": 3863,
+      "agua_perdida_m3_anual": 226
+    },
+    "Oráculo (conocer el futuro)": {
+      "mae_kwh": 0.0,
+      "rmse_kwh": 0.0,
+      "mae_m3": 0.0,
+      "costo_total_cop": 0,
+      "costo_anual_cop": 0,
+      "diesel_kwh_anual": 0,
+      "agua_perdida_m3_anual": 0
+    }
+  },
+  "validacion": {
+    "persistencia_mae": 14.673216520650815,
+    "climatologia_mae": 18.224202635247625,
+    "gb_p50_mae": 11.98
+  },
+  "cobertura_p10_p90": 0.733,
+  "q_star": 0.701,
+  "ahorro_anual_cop": 3687305,
+  "por_anio": {
+    "2023": {
+      "persistencia": 3150380,
+      "gb": 2067684,
+      "dias": 69
+    },
+    "2024": {
+      "persistencia": 12787045,
+      "gb": 9328574,
+      "dias": 366
+    },
+    "2025": {
+      "persistencia": 13094385,
+      "gb": 9563890,
+      "dias": 364
+    }
+  },
+  "particion": {
+    "train": [
+      "2015-01-07",
+      "2021-08-15",
+      2397
+    ],
+    "val": [
+      "2021-08-16",
+      "2023-10-23",
+      799
+    ],
+    "test": [
+      "2023-10-24",
+      "2025-12-30",
+      799
+    ]
+  },
+  "grid_top5": [
+    {
+      "n_estimators": 400,
+      "max_depth": 4,
+      "learning_rate": 0.03,
+      "mae_val": 11.98
+    },
+    {
+      "n_estimators": 400,
+      "max_depth": 2,
+      "learning_rate": 0.06,
+      "mae_val": 11.99
+    },
+    {
+      "n_estimators": 400,
+      "max_depth": 3,
+      "learning_rate": 0.03,
+      "mae_val": 12.02
+    },
+    {
+      "n_estimators": 250,
+      "max_depth": 4,
+      "learning_rate": 0.03,
+      "mae_val": 12.04
+    },
+    {
+      "n_estimators": 250,
+      "max_depth": 3,
+      "learning_rate": 0.06,
+      "mae_val": 12.06
+    }
+  ]
+}

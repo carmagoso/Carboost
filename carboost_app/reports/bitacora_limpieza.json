@@ -1,0 +1,53 @@
+{
+  "fuente": "registro_planta_aquaboost_sintetico.csv",
+  "filas_iniciales": 4023,
+  "reglas": [
+    {
+      "regla": "R1 Filas con fecha duplicada eliminadas",
+      "filas_afectadas": 5,
+      "por_que": "Exportaciones repetidas del SCADA; contarlas dos veces sesga el entrenamiento."
+    },
+    {
+      "regla": "R2 Valores centinela -999 convertidos a faltante",
+      "filas_afectadas": 24,
+      "por_que": "NASA POWER y muchos registradores usan -999 para 'sin dato'; usarlo como número destruye promedios."
+    },
+    {
+      "regla": "R3 GHI fuera de (0, TOA] a faltante",
+      "filas_afectadas": 0,
+      "por_que": "La irradiación en superficie no puede superar la extraterrestre del mismo día."
+    },
+    {
+      "regla": "R4 Energía FV con rendimiento implícito > 1 (pico imposible) a faltante",
+      "filas_afectadas": 5,
+      "por_que": "Un arreglo de 60 kWp no puede entregar más energía que la que recibe; es doble registro del contador."
+    },
+    {
+      "regla": "R5 Energía = 0 con GHI > 2 kWh/m2 (reinicio de contador) a faltante",
+      "filas_afectadas": 4,
+      "por_que": "Si hubo sol y el contador marca cero, es un error de medición, no una falla real de la planta."
+    },
+    {
+      "regla": "R6 Días con rendimiento bajo (falla parcial del inversor) CONSERVADOS",
+      "filas_afectadas": 37,
+      "por_que": "Son eventos reales de operación; borrarlos haría al modelo artificialmente optimista."
+    },
+    {
+      "regla": "R7 Huecos meteorológicos de 1-2 días interpolados linealmente",
+      "filas_afectadas": 24,
+      "por_que": "Las variables de clima cambian suavemente de un día a otro; un hueco corto se interpola sin inventar información."
+    },
+    {
+      "regla": "R8 Huecos de energía <= 2 días imputados con GHI x PR mediano de 7 días",
+      "filas_afectadas": 15,
+      "por_que": "Imputación física (no lineal): usa el sol medido ese día y el rendimiento reciente de la planta."
+    },
+    {
+      "regla": "R9 Huecos largos (> 2 días) se dejan faltantes y no entran al entrenamiento",
+      "filas_afectadas": 9,
+      "por_que": "Rellenar 9 días seguidos sería inventar la respuesta; se excluyen esas filas."
+    }
+  ],
+  "filas_finales": 4018,
+  "faltantes_energia_tras_calendario": 15
+}
